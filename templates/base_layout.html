@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    <title>Articles</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <header class="wrapper">
+            <h1><a href="{% url 'home'%}"><img src="/static/logo.png"/></a></h1>
+            <nav>
+                <ul>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <form class = "logout-link" action="/accounts/logout/" method="post">
+                            {%csrf_token%}
+                            <button type="submit">Logout</button>
+                        </form>
+                    </li>
+                    <li><a href="{% url 'create' %}" class="highlight">New Article</a></li>
+                    {% else %}
+                    <li><a href="/accounts/login/">Login</a></li>
+                    <li><a href="/accounts/signup/">SignUp</a></li>
+                    
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        <div class="wrapper">
+            {% block contend %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
